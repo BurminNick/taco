@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Taco Cloud</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+<body>
+
+<!--<img th:src="@{/images/tacos.jpeg}"/>-->
+
+<h2>ALL ORDERS</h2>
+<br>
+<br>
+
+<ul>
+    <div th:each="order : ${allOrders}">
+        <span th:text="${order.id}">id</span>
+        <span th:text="${order.deliveryName}">deliveryName</span>
+        <span th:text="${order.deliveryCity}">deliveryCity</span>
+
+        <form th:method="DELETE" th:action="@{/admin/all-orders/{id}(id=${order.getId()})}">
+            <input type="submit" value="Delete"/>
+        </form>
+    </div>
+</ul>
+<br>
+<br>
+<br>
+
+<form action="/admin/all-orders/deleteAll" method="post">
+    <input type="hidden" value="${order}">
+    <button type="submit">Delete All Orders</button>
+</form>
+
+<br>
+<br>
+
+<a th:href="@{/}" id="home">HOME</a>
+</body>
+</html>

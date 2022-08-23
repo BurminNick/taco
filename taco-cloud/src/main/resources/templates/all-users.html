@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Taco Cloud</title>
+  <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+<body>
+
+<h2>ALL USERS</h2>
+<br>
+<br>
+
+<ul>
+  <div th:each="user : ${allUsers}">
+    <span th:text="${user.id}">id</span>
+    <span th:text="${user.username}">name</span>
+
+
+    <form th:method="DELETE" th:action="@{/admin/all-users/{id}(id=${user.getId()})}">
+      <input type="submit" value="Delete"/>
+    </form>
+  </div>
+</ul>
+<br>
+<br>
+<br>
+
+<form action="/admin/all-users/deleteAll" method="post">
+  <input type="hidden" value="${user}">
+  <button type="submit">Delete All Users</button>
+</form>
+
+<a th:href="@{/}" id="home">HOME</a>
+</body>
+</html>
